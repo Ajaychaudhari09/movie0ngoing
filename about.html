@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Movie Search</title>
+	<style>
+		#movieDetails {
+			margin-top: 20px;
+			padding: 10px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			background-color: #f9f9f9;
+		}
+	</style>
+</head>
+<body>
+	<h1>Search for a Movie</h1>
+	<input type="text" id="movieSearch" placeholder="Enter movie title">
+	<button onclick="fetchMovieDetails()">Search</button>
+	<div id="movieDetails"></div>
+
+	<script>
+		function fetchMovieDetails() {
+			// Get the movie title from the input field
+			const movieTitle = document.getElementById('movieSearch').value;
+
+			// Define the API endpoint
+			const url = `https://moviesminidatabase.p.rapidapi.com/series/idbyTitle/${encodeURIComponent(movieTitle)}`;
+
+			// Define the options for the fetch request
+			const options = {
+				method: 'GET',
+				headers: {
+					'X-RapidAPI-Key': 'cf6c845940msh241d712c25037c5p191dd9jsn85daf9db70c9',
+		'X-RapidAPI-Host': 'moviesminidatabase.p.rapidapi.com'
+				}
+			};
+
+			// Use the Fetch API to get the movie details
+			fetch(url, options)
+				.then(response => response.json()) // parse the JSON from the response
+				.then(data => {
+					// Display the movie details on the webpage
+					// This assumes you have an element with an ID of "movieDetails" in your HTML
+					document.getElementById('movieDetails').innerText = JSON.stringify(data, null, 2);
+
+					// Save the movie details in local storage
+					localStorage.setItem('movieDetails', JSON.stringify(data));
+				})
+				.catch(error => {
+					// Log any errors to the console
+					console.error('Error:', error);
+				});
+		}
+	</script>
+</body>
+</html>
