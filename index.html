@@ -1,14 +1,10 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>movie go</title>
+    <title>Movie Gallery</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script href="D:\Intel\website trial\output\moviego\index.js"></script>
-  </body>
-  </head>
 </head>
 <body>
     <nav class="navbar" style="background-color: #3929e8;">
@@ -47,26 +43,38 @@
             </div>
         </div>
     </nav>
-
-
-
-    <!-- Display saved movies -->
-    <div id="savedMovies">
-        <!-- Saved movies will be displayed here -->
+    <div class="container mt-5">
+        <div class="row" id="movieGallery">
+            <!-- Movies will be inserted here -->
+        </div>
     </div>
 
-    <button class="btn btn-primary" id="prevPage">Previous Page</button>
-    <div class="btn btn-primary" id="pages"></div>
-<button class="btn btn-primary" id="nextpage">Next Page</button>
-<!-- Movie Gallery -->
-<div class="container mt-5">
-    <div class="row" id="movieGallery">
-        <!-- Movies will be inserted here -->
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary" id="prevPage">Previous Page</button>
+                <div class="btn btn-group" id="pages"></div>
+                <button class="btn btn-primary" id="nextPage">Next Page</button>
+            </div>
+        </div>
     </div>
-</div>
 
 
 
+    <!-- Modal for movie details -->
+    <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="movieModalLabel">Movie Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Movie details will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Footer -->
     <footer class="bg-light text-center text-lg-start">
         <div class="container p-4">
@@ -87,152 +95,136 @@
     </footer>
     <!-- Footer -->
 
-    <script src="output\moviego\js\bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- ... Your existing HTML code ... -->
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            displaySavedMovies(0);
+
+            document.getElementById('movieForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const searchTerm = document.querySelector('input[type="search"]').value;
+                const apiUrl = `http://www.omdbapi.com/?t=${searchTerm}&plot=full&apikey=cf423da3`;
+
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        const resultDiv = document.getElementById('result');
+                        resultDiv.innerHTML = `
+                            <div class="info">
+                                <img src="${data.Poster}" class="poster" >
+
+                                <div>
+                                    <h3>${data.Title}</h3>
+                                    <div class="details">
+                                        <p><strong>Plot:</strong> ${data.Plot}</p>
+                                        <p><strong>Year:</strong> ${data.Year}</p>
+                                        <p><strong>Rated:</strong> ${data.Rated}</p>
+                                        <p><strong>Genre:</strong> ${data.Genre}</p>
+                                        <p><strong>Actors:</strong> ${data.Actors}</p>
+                                        <p><strong>Type:</strong> ${data.Type}</p>
+                                        <p><strong>Released:</strong> ${data.Released}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        saveToLocalStorage(data);
+                        displaySavedMovies(0);
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            });
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    displayMovies();
-});
 
-    document.addEventListener('DOMContentLoaded', function () {
-    // Display first page of saved movies
-    displaySavedMovies(0);
+            document.getElementById('nextPage').addEventListener('click', nextPage);
+            document.getElementById('prevPage').addEventListener('click', prevPage);
+        });
 
-    // Add event listener for the search form
-    document.getElementById('movieForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-        const searchTerm = document.querySelector('input[type="search"]').value;
-        const apiUrl = `http://www.omdbapi.com/?t=&plot=full&apikey=cf423da3&t=${searchTerm}`;
-        
+        let currentPage = 0;
 
+        function nextPage() {
+            currentPage++;
+            displaySavedMovies(currentPage);
+        }
 
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                const resultDiv = document.getElementById('result');
-                resultDiv.innerHTML = `
-                <div class="info">
-                    <img src="${data.Poster}"  class="poster" >
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                displaySavedMovies(currentPage);
+            }
+        }
 
-                    <div>
-                         <h3>${data.Title}</h3>
-                         <div class="details">
+        function displaySavedMovies(page) {
+            const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || [];
+            const movieGallery = document.getElementById('movieGallery');
+            movieGallery.innerHTML = '';
 
+            const start = page * 3;
+            const end = start + 3;
 
-                    <p><strong>Plot:</strong> ${data.Plot}</p>
-                    <p><strong>Year:</strong> ${data.Year}</p>
-                    <p><strong>Rated:</strong> ${data.Rated}</p>
-                    <p><strong>Genre:</strong> ${data.Genre}</p>
-                    <p><strong>Actors:</strong> ${data.Actors}</p>
-                    <p><strong>Type:</strong> ${data.Type}</p>
-                    <p><strong>Released:</strong> ${data.Released}</p>
-                         </div>
+            for (let i = start; i < end && i < savedMovies.length; i++) {
+                const movie = savedMovies[i];
+                movieGallery.innerHTML += `
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img src="${movie.Poster}" class="card-img-top" alt="${movie.Title}" data-bs-toggle="modal" data-bs-target="#movieModal" onclick="showMovieDetails(${i})">
+                            <div class="card-body">
+                                <h5 class="card-title" data-bs-toggle="modal" data-bs-target="#movieModal" onclick="showMovieDetails(${i})">${movie.Title}</h5>
+                            </div>
+                        </div>
                     </div>
-                </div>
                 `;
+            }
 
-                // Save searched movie to local storage
-                saveToLocalStorage(data);
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    });
+            const totalPages = Math.ceil(savedMovies.length / 3);
+            const pagesDiv = document.getElementById('pages');
+            pagesDiv.innerHTML = '';
 
-    // Add event listener for the next page button
-    document.getElementById('nextPage').addEventListener('click', function () {
-        nextPage();
-    });
+            for (let i = 0; i < totalPages; i++) {
+                pagesDiv.innerHTML += `<button class="btn btn-outline-primary" onclick="goToPage(${i})">${i + 1}</button>`;
+            }
+        }
 
-    // Add event listener for the previous page button
-    document.getElementById('prevPage').addEventListener('click', function () {
-        prevPage();
-    });
-});
+        function goToPage(page) {
+            currentPage = page;
+            displaySavedMovies(currentPage);
+        }
 
-let currentPage = 0;
+        function saveToLocalStorage(movieData) {
+            const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || [];
+            const existingMovie = savedMovies.find(movie => movie.Title === movieData.Title);
 
-// Function to display next page of saved movies
-function nextPage() {
-    currentPage++;
-    displaySavedMovies(currentPage);
-}
+            if (!existingMovie) {
+                savedMovies.push(movieData);
+                localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+            }
+        }
 
-// Function to display previous page of saved movies
-function prevPage() {
-    if (currentPage > 0) {
-        currentPage--;
-        displaySavedMovies(currentPage);
-    }
-}
+        function showMovieDetails(index) {
+            const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || [];
+            const movie = savedMovies[index];
+            const modalBody = document.getElementById('modalBody');
 
-// Function to display saved movies
-function displaySavedMovies(page) {
-    // Retrieve saved movies from local storage
-    const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || [];
-
-    // Clear current display
-    const savedMoviesDiv = document.getElementById('savedMovies');
-    savedMoviesDiv.innerHTML = '';
-
-    // Calculate start and end indices for the current page
-    const start = page * 5;
-    const end = start + 5;
-
-    // Display movies for the current page
-    for (let i = start; i < end && i < savedMovies.length; i++) {
-        const movie = savedMovies[i];
-        savedMoviesDiv.innerHTML += `
-            <div class="movie">
-
-                <img  src="${movie.Poster}" class="img-thumbnail">
-                <h2>${movie.Title}</h2>
-                <div class="movie-details">
-                <strong>Plot:</strong> ${movie.Plot}
-                </div>
-                <div class="center">
+            modalBody.innerHTML = `
+                <p><strong>Title:</strong> ${movie.Title}</p>
+                <p><strong>Plot:</strong> ${movie.Plot}</p>
                 <p><strong>Year:</strong> ${movie.Year}</p>
-               <p><strong>Rated:</strong> ${movie.Rated}</p>
+                <p><strong>Rated:</strong> ${movie.Rated}</p>
                 <p><strong>Genre:</strong> ${movie.Genre}</p>
-                </div>
                 <p><strong>Actors:</strong> ${movie.Actors}</p>
                 <p><strong>Type:</strong> ${movie.Type}</p>
                 <p><strong>Released:</strong> ${movie.Released}</p>
-            </div>
-            </table>
-        `;
-    }
-
-    // Display page numbers
-    const totalPages = Math.ceil(savedMovies.length / 5);
-    const pagesDiv = document.getElementById('pages');
-    pagesDiv.innerHTML = '';
-    for (let i = 0; i < totalPages; i++) {
-        pagesDiv.innerHTML += `<button onclick="goToPage(${i})">${i + 1}</button>`;
-    }
-}
-
-// Function to go to a specific page
-function goToPage(page) {
-    currentPage = page;
-    displaySavedMovies(currentPage);
-}
-
-// Function to save searched movie to local storage
-function saveToLocalStorage(movieData) {
-    // Retrieve existing saved movies or initialize an empty array
-    const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || [];
-
-    // Add the new movie data to the array
-    savedMovies.push(movieData);
-
-    // Save the updated array back to local storage
-    localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-
-    // Display the first page of saved movies
-    displaySavedMovies(0);
-}
-
-</script>
-
+            `;
+        }
+    </script>
 </body>
 </html>
+
+
