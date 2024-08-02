@@ -1,230 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Gallery</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <title>Morefusion</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="Essential one/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="css/style.css" rel="stylesheet">
+
+
 </head>
+
 <body>
-    <nav class="navbar" style="background-color: #3929e8;">
-        <div class="container-fluid">
-            <a class="navbar-brand text-light" href="#">dramas ongoing</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
 
-                        <a class="nav-link" href="D:\Intel\website trial\output\moviego\about.html">Movies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="D:\Intel\website trial\output\moviego\moviego.html">Dramas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Anime</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">web series</a>
-                    </li>
-                    <form class="d-flex" id="movieForm" autocomplete="off" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                    <div id="result"></div>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container mt-5">
-        <div class="row" id="movieGallery">
-            <!-- Movies will be inserted here -->
-        </div>
+  <header id="header" class="fixed-top">
+    <div class="container">
+
+      <div class="logo float-left">
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <h1 class="text-light"><a href="#header"><span>NewBiz</span></a></h1> -->
+        <a href="#intro" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"></a>
+      </div>
+
+      <nav class="main-nav float-right d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="#intro">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li class="drop-down"><a href="">Essentials</a>
+            <ul>
+              <li class="nav-item"><a class="nav-link" href="paint.html">Paint</a></li>
+                <li class="nav-item"><a class="nav-link" href="word.html">Word</a></li>
+                <li class="nav-item"><a class="nav-link" href="signature.html">Signature Creator</a></li>
+                <li class="nav-item"><a class="nav-link" href="compiler.html">HTML/CSS/JS Compiler</a></li>
+                <li class="nav-item"><a class="nav-link" href="wallpapaper.html">Wallpapers</a></li>
+                <li class="nav-item"><a class="nav-link" href="top10.html">Top 20 Places</a></li>
+                <li class="nav-item"><a class="nav-link" href="top10.html">Top 10 Colleges</a></li>
+                <li class="nav-item"><a class="nav-link" href="main.py">Top 10 Tech News</a></li>
+                <li class="nav-item"><a class="nav-link" href="24hours.html">What Happened in 24 Hours in India</a></li>
+
+            </ul>
+          </li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </nav><!-- .main-nav -->
+
     </div>
+  </header><!-- #header -->
 
-    <div class="container mt-3">
+  <!--==========================
+    Intro Section
+  ============================-->
+  <section id="intro" class="clearfix">
+    <div class="container">
+
+      <div class="intro-img">
+        <img src="img/intro-img.svg" alt="" class="img-fluid">
+      </div>
+
+      <div class="intro-info">
+        <h2>We provide<br><span>solutions</span><br></h2>
+        <div>
+          <a href="#about" class="btn-get-started scrollto">Get Started</a>
+
+        </div>
+      </div>
+
+    </div>
+  </section><!-- #intro -->
+
+  <main id="main">
+
+    <!--==========================
+      About Us Section
+    ============================-->
+    <section id="about">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>About Us</h3>
+
+        </header>
+
+        <div class="row about-container">
+
+          <div class="col-lg-6 content order-lg-1 order-2">
+            <p>
+              Essential One is a versatile platform offering a range of services to cater to various needs. Here's a brief overview of the services provided:
+
+
+
+            </p>
+
+            <div class="icon-box wow fadeInUp">
+              <div class="icon"><i class="fa fa-shopping-bag"></i></div>
+              <h4 class="title"><a href="">paint</a></h4>
+              <p class="description">Paint: A simple and intuitive tool for creating and editing images.
+</p>
+            </div>
+
+            <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
+              <div class="icon"><i class="fa fa-photo"></i></div>
+              <h4 class="title"><a href="">word</a></h4>
+              <p class="description">Word: A word processing application for creating and editing text documents.</p>
+            </div>
+
+            <div class="icon-box wow fadeInUp" data-wow-delay="0.4s">
+              <div class="icon"><i class="fa fa-bar-chart"></i></div>
+              <h4 class="title"><a href="">html/css/js</a></h4>
+              <p class="description">HTML/CSS/JS Compiler: An online compiler for writing and testing HTML, CSS, and JavaScript code.</p>
+            </div>
+
+          </div>
+
+          <div class="col-lg-6 background order-lg-2 order-1 wow fadeInUp">
+            <img src="img/about-img.svg" class="img-fluid" alt="">
+          </div>
+        </div>
+
+        <div class="row about-extra">
+          <div class="col-lg-6 wow fadeInUp">
+            <img src="img/about-extra-1.svg" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6 wow fadeInUp pt-5 pt-lg-0">
+            Wallpapers: A collection of high-quality wallpapers for personal use.
+Top 20 Places: A curated list of the top 20 places to visit.
+          </div>
+        </div>
+
+        <div class="row about-extra">
+          <div class="col-lg-6 wow fadeInUp order-1 order-lg-2">
+            <img src="img/about-extra-2.svg" class="img-fluid" alt="">
+          </div>
+
+          <div class="col-lg-6 wow fadeInUp pt-4 pt-lg-0 order-2 order-lg-1">
+            <h4>Top 10 Tech News: </h4>
+            <p>
+            The latest and most significant technology news updates.
+            </p>
+            <p>
+              Top 10 Tech News: The latest and most significant technology news updates.
+            </p>
+            <p>
+              Eum quia in. Magni quas ipsum a. Quis ex voluptatem inventore sint quia modi. Numquam est aut fuga mollitia exercitationem nam accusantium provident quia.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- #about -->
+
+    <!--==========================
+      Services Section
+    ============================-->
+
+
         <div class="row">
-            <div class="col">
-                <button class="btn btn-primary" id="prevPage">Previous Page</button>
-                <div class="btn btn-group" id="pages"></div>
-                <button class="btn btn-primary" id="nextPage">Next Page</button>
-            </div>
+          <div class="col-lg-12">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-app">App</li>
+              <li data-filter=".filter-card">Card</li>
+              <li data-filter=".filter-web">Web</li>
+            </ul>
+          </div>
         </div>
-    </div>
 
 
 
-    <!-- Modal for movie details -->
-    <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="movieModalLabel">Movie Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modalBody">
-                    <!-- Movie details will be inserted here -->
-                </div>
-            </div>
+    <!--==========================
+      Contact Section
+    ============================-->
+    <section id="contact">
+      <div class="container-fluid">
+
+        <div class="section-header">
+          <h3>Contact Us</h3>
         </div>
-    </div>
-    <!-- Footer -->
-    <footer class="bg-light text-center text-lg-start">
-        <div class="container p-4">
+
+        <div class="row wow fadeInUp">
+
+          <div class="col-lg-6">
+            <div class="map mb-4 mb-lg-0">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 312px;" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
             <div class="row">
-                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-
-
-                </div>
+              <div class="col-md-5 info">
+                <i class="ion-ios-location-outline"></i>
+                <p>A108 Adam Street, NY 535022</p>
+              </div>
+              <div class="col-md-4 info">
+                <i class="ion-ios-email-outline"></i>
+                <p>info@example.com</p>
+              </div>
+              <div class="col-md-3 info">
+                <i class="ion-ios-telephone-outline"></i>
+                <p>+1 5589 55488 55</p>
+              </div>
             </div>
+
+            <div class="form">
+              <div id="sendmessage">Your message has been sent. Thank you!</div>
+              <div id="errormessage"></div>
+              <form action="" method="post" role="form" class="contactForm">
+                <div class="form-row">
+                  <div class="form-group col-lg-6">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                    <div class="validation"></div>
+                  </div>
+                  <div class="form-group col-lg-6">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                    <div class="validation"></div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                  <div class="validation"></div>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                  <div class="validation"></div>
+                </div>
+                <div class="text-center"><button type="submit" title="Send Message">Send Message</button></div>
+              </form>
+            </div>
+          </div>
+
         </div>
 
-        <!-- Copyright -->
-        <div class="text-center p-3 text-light" style="background-color: rgba(9, 0, 0, 0.997);">
-            © 2024 Copyright:
-            <a class="text-light" href="#!">YourWebsite.com</a>
+      </div>
+    </section><!-- #contact -->
+
+  </main>
+
+  <!--==========================
+    Footer
+  ============================-->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 footer-info">
+            <h3>Essential one</h3>
+            <p>Essential One is a versatile platform offering a range of services to cater to various needs. Here's a brief overview of the services provided:
+
+Paint: A simple and intuitive tool for creating and editing images.
+Word: A word processing application for creating and editing text documents.
+Signature Creator: A tool for generating digital signatures.
+HTML/CSS/JS Compiler: An online compiler for writing and testing HTML, CSS, and JavaScript code.
+Wallpapers: A collection of high-quality wallpapers for personal use.
+Top 20 Places: A curated list of the top 20 places to visit.
+Top 10 Colleges: Information on the top 10 colleges for various fields.
+Top 10 Tech News: The latest and most significant technology news updates.
+What Happened in 24 Hours in India: A summary of major events in India over the past 24 hours.
+Each service is designed to be user-friendly and easily accessible, making Essential One a valuable resource for a wide array of tasks.</p>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Terms of service</a></li>
+              <li><a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+
+
         </div>
-        <!-- Copyright -->
-    </footer>
-    <!-- Footer -->
+      </div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <!-- ... Your existing HTML code ... -->
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>More fusion</strong>. All Rights Reserved
+      </div>
 
+    </div>
+  </footer><!-- #footer -->
 
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <!-- Uncomment below i you want to use a preloader -->
+  <!-- <div id="preloader"></div> -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <!-- JavaScript Libraries -->
+  <script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-migrate.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/mobile-nav/mobile-nav.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/counterup/counterup.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/isotope/isotope.pkgd.min.js"></script>
+  <script src="lib/lightbox/js/lightbox.min.js"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="js/contactform.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            displaySavedMovies(0);
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
 
-            document.getElementById('movieForm').addEventListener('submit', function (event) {
-                event.preventDefault();
-                const searchTerm = document.querySelector('input[type="search"]').value;
-                const apiUrl = `http://www.omdbapi.com/?t=${searchTerm}&plot=full&apikey=cf423da3`;
-
-                fetch(apiUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        const resultDiv = document.getElementById('result');
-                        resultDiv.innerHTML = `
-                            <div class="info">
-                                <img src="${data.Poster}" class="poster" >
-
-                                <div>
-                                    <h3>${data.Title}</h3>
-                                    <div class="details">
-                                        <p><strong>Plot:</strong> ${data.Plot}</p>
-                                        <p><strong>Year:</strong> ${data.Year}</p>
-                                        <p><strong>Rated:</strong> ${data.Rated}</p>
-                                        <p><strong>Genre:</strong> ${data.Genre}</p>
-                                        <p><strong>Actors:</strong> ${data.Actors}</p>
-                                        <p><strong>Type:</strong> ${data.Type}</p>
-                                        <p><strong>Released:</strong> ${data.Released}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-
-                        saveToLocalStorage(data);
-                        displaySavedMovies(0);
-                    })
-                    .catch(error => console.error('Error fetching data:', error));
-            });
-
-
-
-            document.getElementById('nextPage').addEventListener('click', nextPage);
-            document.getElementById('prevPage').addEventListener('click', prevPage);
-        });
-
-        let currentPage = 0;
-
-        function nextPage() {
-            currentPage++;
-            displaySavedMovies(currentPage);
-        }
-
-        function prevPage() {
-            if (currentPage > 0) {
-                currentPage--;
-                displaySavedMovies(currentPage);
-            }
-        }
-
-        function displaySavedMovies(page) {
-            const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || [];
-            const movieGallery = document.getElementById('movieGallery');
-            movieGallery.innerHTML = '';
-
-            const start = page * 3;
-            const end = start + 3;
-
-            for (let i = start; i < end && i < savedMovies.length; i++) {
-                const movie = savedMovies[i];
-                movieGallery.innerHTML += `
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="${movie.Poster}" class="card-img-top" alt="${movie.Title}" data-bs-toggle="modal" data-bs-target="#movieModal" onclick="showMovieDetails(${i})">
-                            <div class="card-body">
-                                <h5 class="card-title" data-bs-toggle="modal" data-bs-target="#movieModal" onclick="showMovieDetails(${i})">${movie.Title}</h5>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            const totalPages = Math.ceil(savedMovies.length / 3);
-            const pagesDiv = document.getElementById('pages');
-            pagesDiv.innerHTML = '';
-
-            for (let i = 0; i < totalPages; i++) {
-                pagesDiv.innerHTML += `<button class="btn btn-outline-primary" onclick="goToPage(${i})">${i + 1}</button>`;
-            }
-        }
-
-        function goToPage(page) {
-            currentPage = page;
-            displaySavedMovies(currentPage);
-        }
-
-        function saveToLocalStorage(movieData) {
-            const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || [];
-            const existingMovie = savedMovies.find(movie => movie.Title === movieData.Title);
-
-            if (!existingMovie) {
-                savedMovies.push(movieData);
-                localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-            }
-        }
-
-        function showMovieDetails(index) {
-            const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || [];
-            const movie = savedMovies[index];
-            const modalBody = document.getElementById('modalBody');
-
-            modalBody.innerHTML = `
-                <p><strong>Title:</strong> ${movie.Title}</p>
-                <p><strong>Plot:</strong> ${movie.Plot}</p>
-                <p><strong>Year:</strong> ${movie.Year}</p>
-                <p><strong>Rated:</strong> ${movie.Rated}</p>
-                <p><strong>Genre:</strong> ${movie.Genre}</p>
-                <p><strong>Actors:</strong> ${movie.Actors}</p>
-                <p><strong>Type:</strong> ${movie.Type}</p>
-                <p><strong>Released:</strong> ${movie.Released}</p>
-            `;
-        }
-    </script>
 </body>
 </html>
-
-
