@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            width: 1100px;
+            padding: 10px;
+            box-shadow: 0px 4px 2px -2px gray;
+        }
+
+        .toolbar > div {
+            margin: 5px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px;
+        }
+
+        label {
+            display: block;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        canvas {
+            border: 1px solid black;
+        }
+
+        .canvas-container {
+            margin-top: 10px;
+        }
+
+        header, footer {
+            width: 100%;
+            padding: 10px;
+            background-color: #f1f1f1;
+            text-align: center;
+            box-shadow: 0px 4px 2px -2px gray;
+        }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        footer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Paint App</h1>
+    </header>
+
+    <div class="toolbar">
+        <div class="tools">
+            <button id="pencil" onclick="usePencil()">Pencil</button>
+            <button id="eraser" onclick="useEraser()">Eraser</button>
+            <label>Tools</label>
+        </div>
+        <div class="sizes">
+            <button onclick="usePencil()">Default</button>
+            <select id="sizeList" onchange="changeStrokeSize()">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+            </select>
+            <label>Size</label>
+        </div>
+        <div class="colors">
+            <button onclick="selectColor()">Select Color</button>
+            <button id="previousColor" onclick="setPreviousColor()"></button>
+            <button id="previousColor2" onclick="setPreviousColor2()"></button>
+        </div>
+        <div class="predefined-colors">
+            <button style="background-color: red;" onclick="setColor('red')">Red</button>
+            <button style="background-color: green;" onclick="setColor('green')">Green</button>
+            <button style="background-color: blue;" onclick="setColor('blue')">Blue</button>
+            <button style="background-color: yellow;" onclick="setColor('yellow')">Yellow</button>
+            <button style="background-color: orange;" onclick="setColor('orange')">Orange</button>
+            <button style="background-color: purple;" onclick="setColor('purple')">Purple</button>
+        </div>
+        <div class="save-options">
+            <button onclick="saveImage()">Save</button>
+            <button onclick="createNew()">New</button>
+            <button onclick="clearCanvas()">Clear</button>
+        </div>
+        <div class="help-settings">
+            <button onclick="showHelp()">Help</button>
+            <button onclick="showSettings()">Settings</button>
+            <button onclick="showAbout()">About</button>
+        </div>
+        <div class="text-entry">
+            <label>Write your Text here:</label>
+            <input type="text" id="textInput">
+            <button onclick="clearText()">Clear</button>
+        </div>
+        <div class="notes">
+            <textarea id="notes" rows="4" cols="40"></textarea>
+        </div>
+    </div>
+
+    <div class="canvas-container">
+        <canvas id="paintCanvas" width="1100" height="500"></canvas>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Paint App. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let strokeColor = 'black';
+        let strokeSize = 1;
+        let previousColor = 'white';
+        let previousColor2 = 'white';
+        let textValue = '';
+
+        const canvas = document.getElementById('paintCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.addEventListener('mousedown', startPainting);
+        canvas.addEventListener('mouseup', stopPainting);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('contextmenu', drawRight);
+        canvas.addEventListener('click', writeText);
+
+        function usePencil() {
+            strokeColor = 'black';
+        }
+
+        function useEraser() {
+            strokeColor = 'white';
+        }
+
+        function selectColor() {
+            const color = prompt("Enter color:");
+            if (color) {
+                strokeColor = color;
+                previousColor2 = previousColor;
+                previousColor = strokeColor;
+                document.getElementById('previousColor').style.backgroundColor = previousColor;
+                document.getElementById('previousColor2').style.backgroundColor = previousColor2;
+            }
+        }
+
+        function setPreviousColor() {
+            strokeColor = previousColor;
+        }
+
+        function setPreviousColor2() {
+            strokeColor = previousColor2;
+        }
+
+        function setColor(color) {
+            strokeColor = color;
+        }
+
+        function changeStrokeSize() {
+            strokeSize = document.getElementById('sizeList').value;
+        }
+
+        function clearCanvas() {
+            if (confirm('Do you want to clear everything?')) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        function createNew() {
+            if (confirm('Do you want to save before you clear everything?')) {
+                saveImage();
+            }
+            clearCanvas();
+        }
+
+        function saveImage() {
+            const link = document.createElement('a');
+            link.download = 'paint.jpg';
+            link.href = canvas.toDataURL('image/jpeg', 1.0);
+            link.click();
+        }
+
+        function showHelp() {
+            alert("1. Draw by holding the left button of the mouse to create lines.\n2. Click the right button to create dotted lines.\n3. Click on Select Color Option to select a specific color\n4. Click on Clear to clear the entire Canvas");
+        }
+
+        function showSettings() {
+            alert("Settings not available");
+        }
+
+        function showAbout() {
+            alert("This paint app is best!");
+        }
+
+        function clearText() {
+            document.getElementById('textInput').value = '';
+        }
+
+        function writeText(event) {
+            const textInput = document.getElementById('textInput').value;
+            ctx.fillStyle = strokeColor;
+            ctx.fillText(textInput, event.offsetX, event.offsetY);
+        }
+
+        let painting = false;
+        let prevX = 0;
+        let prevY = 0;
+
+        function startPainting(event) {
+            painting = true;
+            prevX = event.offsetX;
+            prevY = event.offsetY;
+        }
+
+        function stopPainting() {
+            painting = false;
+        }
+
+        function draw(event) {
+            if (!painting) return;
+
+            ctx.lineWidth = strokeSize;
+            ctx.strokeStyle = strokeColor;
+            ctx.lineCap = 'round';
+
+            ctx.beginPath();
+            ctx.moveTo(prevX, prevY);
+            ctx.lineTo(event.offsetX, event.offsetY);
+            ctx.stroke();
+            ctx.closePath();
+
+            prevX = event.offsetX;
+            prevY = event.offsetY;
+        }
+
+        function drawRight(event) {
+            if (event.button !== 2) return;
+
+            event.preventDefault();
+            ctx.fillStyle = strokeColor;
+            ctx.beginPath();
+            ctx.arc(event.offsetX, event.offsetY, strokeSize / 2, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.closePath();
+        }
+    </script>
+</body>
+</html>
